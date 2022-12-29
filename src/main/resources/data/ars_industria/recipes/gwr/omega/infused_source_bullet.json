@@ -1,0 +1,45 @@
+{
+  "type": "forge:conditional",
+
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "gunswithoutroses"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "arsomega"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "minecraft:gunpowder"
+          },
+          {
+            "item": "arsomega:infused_diamond"
+          }
+        ],
+        "result": {
+          "item": "ars_industria:infused_source_bullet",
+          "count": 32
+        }
+      }
+    }
+  ]
+}

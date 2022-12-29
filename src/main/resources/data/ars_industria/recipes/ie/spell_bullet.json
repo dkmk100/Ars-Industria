@@ -1,0 +1,35 @@
+{
+  "type": "forge:conditional",
+
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "immersiveengineering"
+        }
+      ],
+      "recipe": {
+        "type": "immersiveengineering:blueprint",
+        "inputs": [
+          {
+            "item": "immersiveengineering:empty_casing"
+          },
+          {
+            "tag": "forge:gunpowder"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          }
+        ],
+        "category": "specialBullet",
+        "result": {
+          "item": "ars_industria:spell_bullet"
+        }
+      }
+    },
+    {
+
+    }
+  ]
+}

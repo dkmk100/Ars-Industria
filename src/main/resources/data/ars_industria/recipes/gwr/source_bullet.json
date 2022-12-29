@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "gunswithoutroses"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "ars_nouveau:source_gem"
+          },
+          {
+            "item": "minecraft:gunpowder"
+          }
+        ],
+        "result": {
+          "item": "ars_industria:source_bullet",
+          "count": 32
+        }
+      }
+    },
+    {
+
+    }
+  ]
+}

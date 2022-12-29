@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ars_industria:item/enchanters_gatling"
+  }
+}
