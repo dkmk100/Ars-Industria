@@ -1,0 +1,39 @@
+{
+  "type": "forge:conditional",
+
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "botania"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " s ",
+          "gig",
+          " s "
+        ],
+        "key": {
+          "g": {
+            "tag": "forge:ingots/gold"
+          },
+          "s": {
+            "tag": "forge:gems/source"
+          },
+          "i": {
+            "tag": "botania:dragonstone_gems"
+          }
+        },
+        "result": {
+          "item": "ars_industria:botanic_sourcelink"
+        }
+      }
+    },
+    {
+
+    }
+  ]
+}

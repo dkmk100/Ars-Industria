@@ -55,22 +55,24 @@ public class GWRBulletEntityMixin extends Fireball implements ISpellBullet {
         return mySpell;
     }
 
-    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = false)
+    //the next 3 mixins are all overrides of vanilla methods so they need remap = true.
+
+    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = true)
     public void addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if(mySpell!=null) {
             compound.putString("an_spell", mySpell.serialize());
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = false)
+    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = true)
     public void readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if(compound.contains("an_spell")){
             mySpell = Spell.deserialize(compound.getString("an_spell"));
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;onHitEntity(Lnet/minecraft/world/phys/EntityHitResult;)V", cancellable = false, remap = false)
-    public void onHitEntity(EntityHitResult raytrace, CallbackInfo ci) {
+    @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;onHitEntity(Lnet/minecraft/world/phys/EntityHitResult;)V", cancellable = false, remap = true)
+    protected void onHitEntity(EntityHitResult raytrace, CallbackInfo ci) {
         if (!this.level.isClientSide && raytrace.getEntity() instanceof LivingEntity) {
             Entity shooter = this.getOwner();
             if(mySpell!=null && mySpell.recipe.size() > 0){

@@ -24,7 +24,7 @@ public class IndustriaMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         boolean value = CONDITIONS.getOrDefault(mixinClassName, TRUE).get();
-        Logger.getGlobal().info(mixinClassName + "mixing? "+value);
+        Logger.getGlobal().warning(mixinClassName + " mixing? "+value);
         return value;
     }
 

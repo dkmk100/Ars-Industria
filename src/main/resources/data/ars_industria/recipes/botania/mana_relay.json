@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "botania"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "g g",
+          "gMg",
+          "g g"
+        ],
+        "key": {
+          "g": {
+            "tag": "forge:ingots/gold"
+          },
+          "M": {
+            "tag": "botania:dragonstone_gems"
+          }
+        },
+        "result": {
+          "item": "ars_industria:mana_relay"
+        }
+      }
+    },
+    {
+
+    }
+  ]
+}

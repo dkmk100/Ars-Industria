@@ -9,8 +9,14 @@ public class CompatHandler {
     public static boolean GWRLoaded(){
         return ModList.get().isLoaded("gunswithoutroses");
     }
+    public static boolean BotaniaLoaded()
+    {
+        return ModList.get().isLoaded("botania");
+    }
+
 
     public static boolean OmegaLoaded(){
         return ModList.get().isLoaded("arsomega");
     }
+
 }

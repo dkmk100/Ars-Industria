@@ -167,11 +167,14 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a full dependency
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curio_version}")
 
-    runtimeOnly fg.deobf("curse.maven:exp-597007:4191606")  // Ars Omega
+    //runtimeOnly fg.deobf("curse.maven:exp-597007:4191606")  // Ars Omega
     compileOnly fg.deobf("curse.maven:exp-597007:4191606")
 
     runtimeOnly fg.deobf("curse.maven:exp-231951:3964014")  // Immersive Engineering
     compileOnly fg.deobf("curse.maven:exp-231951:3964014")
+
+    runtimeOnly fg.deobf('vazkii.botania:Botania:1.18.2-435')
+    compileOnly fg.deobf('vazkii.botania:Botania:1.18.2-435')
 
     runtimeOnly fg.deobf("maven.modrinth:guns-without-roses:${gwr_file}") //guns without roses
     compileOnly fg.deobf("maven.modrinth:guns-without-roses:${gwr_file}")

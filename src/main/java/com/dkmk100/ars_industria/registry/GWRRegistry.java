@@ -6,11 +6,9 @@ import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
 import com.hollingsworth.arsnouveau.setup.ItemsRegistry;
 import lykrast.gunswithoutroses.registry.ItemGroupGunsWithoutRoses;
 import lykrast.gunswithoutroses.registry.ModSounds;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
 public class GWRRegistry {

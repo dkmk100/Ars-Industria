@@ -216,7 +216,6 @@ public class StatsModifier{
         }
 
         public AugmentModification(AbstractAugment aug, boolean costs, int amount){
-            ArsIndustria.LOGGER.info("augment buff, count: "+amount);
             augment = aug;
             affectCost = costs;
             count = amount;
@@ -244,7 +243,6 @@ public class StatsModifier{
         }
 
         public InnerAugmentModification(AbstractAugment aug, boolean costs, int amountEach, int amountTotal){
-            ArsIndustria.LOGGER.info("inner augment buff, count: "+amountEach + ", max total: "+amountTotal);
             augment = aug;
             affectCost = costs;
             countEach = amountEach;

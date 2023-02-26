@@ -7,5 +7,7 @@
 	"item.ars_industria.source_bullet": "Source Bullet",
 	"item.ars_industria.infused_source_bullet": "Infused Source Bullet",
 	"item.ars_industria.arcane_source_bullet": "Arcane Source Bullet",
-	"item.immersiveengineering.bullet.spell_bullet": "Spell Cartridge"
+	"item.immersiveengineering.bullet.spell_bullet": "Spell Cartridge",
+	"block.ars_industria.mana_relay": "Mana Relay",
+	"block.ars_industria.botanic_sourcelink": "Botanic Sourcelink"
 }
