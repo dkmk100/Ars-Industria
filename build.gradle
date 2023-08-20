@@ -163,7 +163,7 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curio_version}")
 
 
-    //runtimeOnly fg.deobf("curse.maven:ars-omega-597007:4623885")  // Ars Omega
+    runtimeOnly fg.deobf("curse.maven:ars-omega-597007:4623885")  // Ars Omega
     compileOnly fg.deobf("curse.maven:ars-omega-597007:4623885")
 
     runtimeOnly fg.deobf("curse.maven:immersive-engineering-231951:4535935")  // Immersive Engineering

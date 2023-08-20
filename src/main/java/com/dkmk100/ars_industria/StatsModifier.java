@@ -134,15 +134,11 @@ public class StatsModifier{
     }
 
     public Spell ModifySpell(Spell spell){
-        ArsIndustria.LOGGER.error("modify spell called!!! ");
-        return spell;
-        /*
-
         for(AugmentModification mod : endModifications){
             //adding in this way does not augment cost
             spell.add(mod.augment, mod.count);
             if(mod.affectCost){
-                spell.setCost(spell.getCastingCost() + mod.augment.getConfigCost());
+                spell.addDiscount(mod.augment.getCastingCost());
             }
         }
 
@@ -183,7 +179,7 @@ public class StatsModifier{
                         for (int i3 = 0; i3 < augment.countEach; ++i3) {
                             recipe.add(augment.augment);
                             if(augment.affectCost){
-                                spell.setCost(spell.getCastingCost() + augment.augment.getConfigCost());
+                                spell.addDiscount(augment.augment.getCastingCost());
                             }
                         }
                     }
@@ -193,9 +189,8 @@ public class StatsModifier{
 
         spell.recipe = recipe;
 
-        spell.setCost(Math.round(spell.getCastingCost() * costMultiplier));
+        spell.addDiscount(Math.round(spell.getDiscountedCost() * (1f - costMultiplier)));
         return spell;
-         */
     }
 
     public SpellStats ModifyStats(SpellStats stats){
