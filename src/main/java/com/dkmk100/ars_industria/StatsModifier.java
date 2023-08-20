@@ -1,11 +1,21 @@
 package com.dkmk100.ars_industria;
 
 import com.dkmk100.arsomega.glyphs.IIgnoreBuffs;
+import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDampen;
+import com.hollingsworth.arsnouveau.common.spell.method.MethodTouch;
+import com.hollingsworth.arsnouveau.common.util.PortUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.HitResult;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +26,9 @@ public class StatsModifier{
     List<InnerAugmentModification> innerModifications = new ArrayList<>();
     float costMultiplier = 1f;
     int costIncrease = 0;
+    static Method getStats = null;
+    static Method enoughMana = null;
+    static Class AugmentError = null;
 
     public StatsModifier(){
 
@@ -43,6 +56,53 @@ public class StatsModifier{
     public StatsModifier withInnerAugment(AbstractAugment augment, int countEach, int maxTotal, boolean hasCost){
         this.innerModifications.add(new InnerAugmentModification(augment,hasCost,countEach,maxTotal));
         return this;
+    }
+
+    public static boolean CastWithoutLimitErrors(SpellResolver resolver, HitResult result){
+        if(AugmentError == null){
+            InitReflection();
+        }
+        try {
+            //sorry for all the reflection shenanigans
+            SpellContext context = resolver.spellContext;
+            LivingEntity caster = context.getUnwrappedCaster();
+            ItemStack stack = context.getCasterTool();
+            Spell spell = resolver.spell;
+            ISpellValidator validator = ArsNouveauAPI.getInstance().getSpellCastingSpellValidator();
+            List<SpellValidationError> validationErrors = validator.validate(spell.recipe);
+            for(SpellValidationError error : validationErrors){
+                if(!(AugmentError.isInstance(error))){
+                    PortUtil.sendMessageNoSpam(caster, error.makeTextComponentExisting());
+                    return false;
+                }
+            }
+
+            if((boolean) enoughMana.invoke(resolver,caster)) {
+                resolver.onResolveEffect(caster.level,result);
+                resolver.expendMana();
+            }
+            else{
+                return false;
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
+    }
+
+    static void InitReflection(){
+        try{
+            getStats = SpellResolver.class.getDeclaredMethod("getCastStats");
+            enoughMana = SpellResolver.class.getDeclaredMethod("enoughMana", LivingEntity.class);
+            AugmentError = Class.forName("com.hollingsworth.arsnouveau.common.spell.validation.ActionAugmentationPolicyValidator$ActionAugmentationPolicyValidationError");
+            getStats.setAccessible(true);
+            enoughMana.setAccessible(true);
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

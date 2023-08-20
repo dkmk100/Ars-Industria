@@ -19,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
@@ -63,10 +64,9 @@ public class SourceBullet extends BulletItem {
                 Spell spell = spellBullet.getSpell();
                 Player player = (Player) shooter;
                 ArsIndustria.LOGGER.info("trying to cast spell on entity");
-                ItemStack stack = new ItemStack(Items.DIRT);
                 SpellContext context = new SpellContext(world, spell, (Player) shooter, new PlayerCaster((Player)shooter));
                 SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnEntity(stack, target, InteractionHand.MAIN_HAND);
+                StatsModifier.CastWithoutLimitErrors(resolver, new EntityHitResult(target));
             }
         //}
     }
@@ -77,10 +77,9 @@ public class SourceBullet extends BulletItem {
                 ISpellBullet spellBullet = (ISpellBullet) projectile;
                 Spell spell = spellBullet.getSpell();
                 Player player = (Player) shooter;
-                ItemStack stack = new ItemStack(Items.DIRT);
                 SpellContext context = new SpellContext(world, spell, (Player) shooter, new PlayerCaster((Player)shooter));
                 SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnBlock(result);
+                StatsModifier.CastWithoutLimitErrors(resolver, result);
             }
         //}
     }

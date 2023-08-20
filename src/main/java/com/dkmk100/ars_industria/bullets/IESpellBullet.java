@@ -3,6 +3,7 @@ package com.dkmk100.ars_industria.bullets;
 import blusunrize.immersiveengineering.api.tool.BulletHandler;
 import blusunrize.immersiveengineering.common.entities.RevolvershotEntity;
 import com.dkmk100.ars_industria.ArsIndustria;
+import com.dkmk100.ars_industria.StatsModifier;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -37,26 +38,11 @@ public class IESpellBullet implements BulletHandler.IBullet {
         }
         if(!world.isClientSide && shooter instanceof Player) {
             Player player = (Player) shooter;
-            if (rtr instanceof EntityHitResult target) {
-                ArsIndustria.LOGGER.info("trying to cast spell on entity");
-                Entity hitEntity = target.getEntity();
-                if (hitEntity != null) {
-                    ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
-                    ISpellCaster caster = new SpellCaster(stack);
-                    SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
-                    SpellResolver resolver = new SpellResolver(context);
-                    resolver.onCastOnEntity(stack, hitEntity, InteractionHand.MAIN_HAND);
-                }
-            }
-            else if (rtr instanceof BlockHitResult target) {
-                ArsIndustria.LOGGER.info("trying to cast spell on block");
-
-                ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
-                ISpellCaster caster = new SpellCaster(stack);
-                SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
-                SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnBlock(target);
-            }
+            ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
+            ISpellCaster caster = new SpellCaster(stack);
+            SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
+            SpellResolver resolver = new SpellResolver(context);
+            StatsModifier.CastWithoutLimitErrors(resolver,rtr);
         }
     }
 
