@@ -1,6 +1,5 @@
 package com.dkmk100.ars_industria;
 
-import com.dkmk100.ars_industria.glyphs.TestEffect;
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 

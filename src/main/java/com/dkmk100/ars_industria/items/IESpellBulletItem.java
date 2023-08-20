@@ -12,7 +12,6 @@ import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
 import com.hollingsworth.arsnouveau.common.spell.method.MethodTouch;
 import com.hollingsworth.arsnouveau.common.util.PortUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +39,7 @@ public class IESpellBulletItem extends BulletItem implements ICasterTool {
 
     @Override
     public void sendInvalidMessage(Player player) {
-        PortUtil.sendMessageNoSpam(player, new TranslatableComponent("ars_nouveau.sword.invalid"));
+        PortUtil.sendMessageNoSpam(player, Component.m_237115_("ars_nouveau.sword.invalid"));
     }
 
     @Override

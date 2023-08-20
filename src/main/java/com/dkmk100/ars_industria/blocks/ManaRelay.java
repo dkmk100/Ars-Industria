@@ -17,18 +17,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.block.IWandBindable;
-import vazkii.botania.api.mana.IManaCollector;
-import vazkii.botania.api.subtile.TileEntityGeneratingFlower;
+import vazkii.botania.api.block.WandBindable;
+import vazkii.botania.api.block_entity.GeneratingFlowerBlockEntity;
+import vazkii.botania.api.mana.ManaCollector;
 import vazkii.botania.common.helper.MathHelper;
 
 import java.util.Objects;
 import java.util.Optional;
 
-public class ManaRelay extends ModdedTile implements ITickable, IWandBindable {
+public class ManaRelay extends ModdedTile implements ITickable, WandBindable {
 
     BlockPos bindingPos = null;
 
@@ -76,7 +74,7 @@ public class ManaRelay extends ModdedTile implements ITickable, IWandBindable {
     }
 
     public void transferMana() {
-        IManaCollector collector = findBindCandidateAt(bindingPos);
+        ManaCollector collector = findBindCandidateAt(bindingPos);
         if (collector != null && level.getGameTime() % 20 == 0)
             if (!collector.isFull()) {
                 SourceJarTile tile = getJar(5, getLevel(), 100);
@@ -138,17 +136,17 @@ public class ManaRelay extends ModdedTile implements ITickable, IWandBindable {
     }
 
     public int getBindingRadius() {
-        return TileEntityGeneratingFlower.LINK_RANGE;
+        return GeneratingFlowerBlockEntity.LINK_RANGE;
     }
 
 
-    public @javax.annotation.Nullable IManaCollector findBindCandidateAt(BlockPos pos) {
+    public @javax.annotation.Nullable ManaCollector findBindCandidateAt(BlockPos pos) {
         if (level == null || pos == null) {
             return null;
         }
 
         BlockEntity be = level.getBlockEntity(pos);
-        return be != null && IManaCollector.class.isAssignableFrom(be.getClass()) ? (IManaCollector) be : null;
+        return be != null && ManaCollector.class.isAssignableFrom(be.getClass()) ? (ManaCollector) be : null;
     }
 
 

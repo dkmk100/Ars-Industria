@@ -9,16 +9,12 @@ import com.hollingsworth.arsnouveau.api.spell.AbstractCastMethod;
 import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
 import com.hollingsworth.arsnouveau.api.spell.Spell;
-import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
-import com.hollingsworth.arsnouveau.common.spell.method.MethodTouch;
 import com.hollingsworth.arsnouveau.common.util.PortUtil;
 import lykrast.gunswithoutroses.entity.BulletEntity;
 import lykrast.gunswithoutroses.item.GunItem;
 import lykrast.gunswithoutroses.item.IBullet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 import java.util.List;
 
@@ -99,17 +94,17 @@ public class GWREnchantersGun extends GunItem implements ICasterTool, ISpellModi
 
     @Override
     public void sendInvalidMessage(Player player) {
-        PortUtil.sendMessageNoSpam(player, new TranslatableComponent("ars_nouveau.sword.invalid"));
+        PortUtil.sendMessageNoSpam(player, Component.m_237115_("ars_nouveau.sword.invalid"));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if(creativeOnly){
-            tooltip.add(new TextComponent("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.m_237113_("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
         }
         if(repairMaterial!=null && repairMaterial.get() != null && repairMaterial.get().getItems().length > 0){
-            tooltip.add(new TextComponent("Repair with " + repairMaterial.get().getItems()[0].getDisplayName().getString()));
+            tooltip.add(Component.m_237113_("Repair with " + repairMaterial.get().getItems()[0].getDisplayName().getString()));
         }
         getInformation(stack, worldIn, tooltip, flagIn);
 

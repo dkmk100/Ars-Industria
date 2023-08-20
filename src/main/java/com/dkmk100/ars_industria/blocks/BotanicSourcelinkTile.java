@@ -13,11 +13,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import vazkii.botania.api.BotaniaForgeCapabilities;
-import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.ManaReceiver;
 
 public class BotanicSourcelinkTile extends SourcelinkTile implements ICapabilityProvider {
 
-    LazyOptional<IManaReceiver> manaReceiverLazyOptional;
+    LazyOptional<ManaReceiver> manaReceiverLazyOptional;
 
     public BotanicSourcelinkTile(BlockPos pos, BlockState state){
         this(BotaniaRegistry.botanicSourcelink.get(),pos,state);
@@ -39,7 +39,7 @@ public class BotanicSourcelinkTile extends SourcelinkTile implements ICapability
         return this.getMaxSource();
     }
 
-    private LazyOptional<IManaReceiver> makeReceiver(){
+    private LazyOptional<ManaReceiver> makeReceiver(){
         return LazyOptional.of(() -> new CustomManaReceiver(this,BotaniaRegistry.efficiency));
     }
 

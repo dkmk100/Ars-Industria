@@ -60,14 +60,14 @@ public class GWRBulletEntityMixin extends Fireball implements ISpellBullet {
     @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = true)
     public void addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if(mySpell!=null) {
-            compound.putString("an_spell", mySpell.serialize());
+            compound.put("an_spell", mySpell.serialize());
         }
     }
 
     @Inject(at = @At("RETURN"), method = "Llykrast/gunswithoutroses/entity/BulletEntity;readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V", cancellable = false, remap = true)
     public void readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if(compound.contains("an_spell")){
-            mySpell = Spell.deserialize(compound.getString("an_spell"));
+            mySpell = Spell.fromTag(compound.getCompound("an_spell"));
         }
     }
 

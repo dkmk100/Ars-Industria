@@ -1,8 +1,9 @@
+/*
 package com.dkmk100.ars_industria.mixin;
+
 
 import com.dkmk100.ars_industria.ArsIndustria;
 import com.hollingsworth.arsnouveau.common.entity.WildenGuardian;
-import com.hollingsworth.arsnouveau.common.entity.goal.guardian.LaserAttackGoal;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,11 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/*
-This should not exist
-but I'm too lazy to submit a PR to ars ATM, probably will in a couple days
-expect this to disappear quickly
- */
 @Mixin(LaserAttackGoal.class)
 public class LaserAttackMixin {
 
@@ -51,3 +47,4 @@ public class LaserAttackMixin {
         }
     }
 }
+ */

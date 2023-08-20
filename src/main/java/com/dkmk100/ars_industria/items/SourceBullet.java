@@ -4,12 +4,12 @@ import com.dkmk100.ars_industria.ArsIndustria;
 import com.dkmk100.ars_industria.StatsModifier;
 import com.dkmk100.ars_industria.entities.ISpellBullet;
 import com.hollingsworth.arsnouveau.api.spell.*;
+import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.IWrappedCaster;
+import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.PlayerCaster;
 import lykrast.gunswithoutroses.entity.BulletEntity;
 import lykrast.gunswithoutroses.item.BulletItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -64,11 +64,9 @@ public class SourceBullet extends BulletItem {
                 Player player = (Player) shooter;
                 ArsIndustria.LOGGER.info("trying to cast spell on entity");
                 ItemStack stack = new ItemStack(Items.DIRT);
-                ISpellCaster caster = new SpellCaster(stack);
-                caster.setSpell(spell);
-                SpellContext context = new SpellContext(caster, (LivingEntity) shooter);
+                SpellContext context = new SpellContext(world, spell, (Player) shooter, new PlayerCaster((Player)shooter));
                 SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnEntity(stack, player, target, InteractionHand.MAIN_HAND);
+                resolver.onCastOnEntity(stack, target, InteractionHand.MAIN_HAND);
             }
         //}
     }
@@ -80,11 +78,9 @@ public class SourceBullet extends BulletItem {
                 Spell spell = spellBullet.getSpell();
                 Player player = (Player) shooter;
                 ItemStack stack = new ItemStack(Items.DIRT);
-                ISpellCaster caster = new SpellCaster(stack);
-                caster.setSpell(spell);
-                SpellContext context = new SpellContext(caster, (LivingEntity) shooter);
+                SpellContext context = new SpellContext(world, spell, (Player) shooter, new PlayerCaster((Player)shooter));
                 SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnBlock(result, player);
+                resolver.onCastOnBlock(result);
             }
         //}
     }
@@ -93,7 +89,7 @@ public class SourceBullet extends BulletItem {
     @Override
     public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if(creativeItem){
-            tooltip.add(new TextComponent("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.m_237113_("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
         }
         super.appendHoverText(stack,worldIn,tooltip,flagIn);
 

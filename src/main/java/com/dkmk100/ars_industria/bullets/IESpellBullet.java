@@ -43,9 +43,9 @@ public class IESpellBullet implements BulletHandler.IBullet {
                 if (hitEntity != null) {
                     ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
                     ISpellCaster caster = new SpellCaster(stack);
-                    SpellContext context = new SpellContext(caster, (LivingEntity) shooter);
+                    SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
                     SpellResolver resolver = new SpellResolver(context);
-                    resolver.onCastOnEntity(stack, player, hitEntity, InteractionHand.MAIN_HAND);
+                    resolver.onCastOnEntity(stack, hitEntity, InteractionHand.MAIN_HAND);
                 }
             }
             else if (rtr instanceof BlockHitResult target) {
@@ -53,9 +53,9 @@ public class IESpellBullet implements BulletHandler.IBullet {
 
                 ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
                 ISpellCaster caster = new SpellCaster(stack);
-                SpellContext context = new SpellContext(caster, (LivingEntity) shooter);
+                SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
                 SpellResolver resolver = new SpellResolver(context);
-                resolver.onCastOnBlock(target, player);
+                resolver.onCastOnBlock(target);
             }
         }
     }

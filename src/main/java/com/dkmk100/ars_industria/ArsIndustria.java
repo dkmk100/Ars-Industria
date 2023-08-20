@@ -42,9 +42,9 @@ public class ArsIndustria
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        ForgeRegistries.RECIPE_SERIALIZERS.getEntries().forEach(((item) -> {
-            ArsIndustria.LOGGER.info(item.getValue().getRegistryName());
-        }));
+        //ForgeRegistries.RECIPE_SERIALIZERS.getEntries().forEach(((item) -> {
+        //    ArsIndustria.LOGGER.info(item.getValue().);
+        //}));
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

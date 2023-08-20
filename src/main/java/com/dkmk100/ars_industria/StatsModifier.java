@@ -3,10 +3,8 @@ package com.dkmk100.ars_industria;
 import com.dkmk100.arsomega.glyphs.IIgnoreBuffs;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDampen;
-import com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -79,34 +77,34 @@ public class StatsModifier{
     public void addTooltip(List<Component> tooltip){
         for(AugmentModification augment : endModifications){
             if(augment.affectCost) {
-                tooltip.add(new TextComponent("Adds " + augment.count + " " + augment.augment.getLocaleName() + " to the end of the spell on cast, increasing cost accordingly"));
+                tooltip.add(Component.m_237113_("Adds " + augment.count + " " + augment.augment.getLocaleName() + " to the end of the spell on cast, increasing cost accordingly"));
             }
             else{
-                tooltip.add(new TextComponent("Adds " + augment.count + " free " + augment.augment.getLocaleName() + " to the end of the spell on cast"));
+                tooltip.add(Component.m_237113_("Adds " + augment.count + " free " + augment.augment.getLocaleName() + " to the end of the spell on cast"));
             }
         }
         for(InnerAugmentModification augment : innerModifications){
             if(augment.affectCost) {
-                tooltip.add(new TextComponent("Adds " + augment.countEach + " " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast, increasing cost accordingly"));
+                tooltip.add(Component.m_237113_("Adds " + augment.countEach + " " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast, increasing cost accordingly"));
             }
             else{
-                tooltip.add(new TextComponent("Adds " + augment.countEach + " free " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast"));
+                tooltip.add(Component.m_237113_("Adds " + augment.countEach + " free " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast"));
             }
         }
 
         float discount = Math.round((1f - costMultiplier)*1000)/10f;
 
         if(discount>0) {
-            tooltip.add(new TextComponent("Spell discount: " + discount + "%").withStyle(ChatFormatting.DARK_GREEN));
+            tooltip.add(Component.m_237113_("Spell discount: " + discount + "%").withStyle(ChatFormatting.DARK_GREEN));
         }
         else if(discount!=0){
-            tooltip.add(new TextComponent("Spell cost increase: " + (-1 * discount) + "%").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.m_237113_("Spell cost increase: " + (-1 * discount) + "%").withStyle(ChatFormatting.DARK_RED));
         }
         if(costIncrease > 0){
-            tooltip.add(new TextComponent("Spell flat cost increase: " + costIncrease + " mana").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.m_237113_("Spell flat cost increase: " + costIncrease + " mana").withStyle(ChatFormatting.DARK_RED));
         }
         else if(costIncrease < 0){
-            tooltip.add(new TextComponent("Spell flat discount: " + (-1 * costIncrease) + " mana").withStyle(ChatFormatting.DARK_GREEN));
+            tooltip.add(Component.m_237113_("Spell flat discount: " + (-1 * costIncrease) + " mana").withStyle(ChatFormatting.DARK_GREEN));
         }
 
     }
@@ -136,6 +134,9 @@ public class StatsModifier{
     }
 
     public Spell ModifySpell(Spell spell){
+        ArsIndustria.LOGGER.error("modify spell called!!! ");
+        return spell;
+        /*
 
         for(AugmentModification mod : endModifications){
             //adding in this way does not augment cost
@@ -194,6 +195,7 @@ public class StatsModifier{
 
         spell.setCost(Math.round(spell.getCastingCost() * costMultiplier));
         return spell;
+         */
     }
 
     public SpellStats ModifyStats(SpellStats stats){

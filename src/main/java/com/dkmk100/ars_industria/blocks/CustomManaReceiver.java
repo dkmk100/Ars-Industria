@@ -3,9 +3,9 @@ package com.dkmk100.ars_industria.blocks;
 import com.dkmk100.ars_industria.registry.BotaniaRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.ManaReceiver;
 
-public class CustomManaReceiver implements IManaReceiver {
+public class CustomManaReceiver implements ManaReceiver {
 
     BotanicSourcelinkTile tile;
     float efficiency;

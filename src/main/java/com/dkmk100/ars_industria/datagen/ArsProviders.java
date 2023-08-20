@@ -2,7 +2,6 @@ package com.dkmk100.ars_industria.datagen;
 
 import com.dkmk100.ars_industria.ArsIndustria;
 import com.dkmk100.ars_industria.ArsNouveauRegistry;
-import com.dkmk100.ars_industria.glyphs.TestEffect;
 import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantingApparatusRecipe;
 import com.hollingsworth.arsnouveau.api.familiar.AbstractFamiliarHolder;
 import com.hollingsworth.arsnouveau.api.ritual.AbstractRitual;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.io.IOException;
 import java.nio.file.Path;
-
+/*
 public class ArsProviders {
 
     public static class GlyphProvider extends GlyphRecipeProvider {
@@ -60,15 +59,6 @@ public class ArsProviders {
 
         @Override
         public void run(HashCache cache) throws IOException {
-            //example of an apparatus recipe
-            /*
-            recipes.add(builder()
-                    .withReagent(ItemsRegistry.SOURCE_GEM)
-                    .withPedestalItem(4, Recipes.SOURCE_GEM)
-                    .withResult(ItemsRegistry.BUCKET_OF_SOURCE)
-                    .build()
-            );
-             */
 
             Path output = this.generator.getOutputFolder();
             for (EnchantingApparatusRecipe g : recipes){
@@ -98,12 +88,6 @@ public class ArsProviders {
 
         @Override
         public void run(HashCache cache) throws IOException {
-
-            /*
-            recipes.add(new ImbuementRecipe("example_focus", Ingredient.of(Items.AMETHYST_SHARD), new ItemStack(ItemsRegistry.SUMMONING_FOCUS, 1), 5000)
-                    .withPedestalItem(ItemsRegistry.WILDEN_TRIBUTE)
-            );
-            */
 
             Path output = generator.getOutputFolder();
             for(ImbuementRecipe g : recipes){
@@ -183,9 +167,6 @@ public class ArsProviders {
             this.pages.add(new PatchouliPage(builder, getPath(ENCHANTMENTS, enchantment.getRegistryName().getPath())));
         }
 
-        /**
-         * Gets a name for this provider, to use in logging.
-         */
         @Override
         public String getName() {
             return "Example Patchouli Datagen";
@@ -208,3 +189,4 @@ public class ArsProviders {
     }
 
 }
+ */
