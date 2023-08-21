@@ -8,13 +8,13 @@ import vazkii.botania.api.mana.ManaReceiver;
 public class CustomManaReceiver implements ManaReceiver {
 
     BotanicSourcelinkTile tile;
-    float efficiency;
+    double efficiency;
     int neededValue;
 
-    public CustomManaReceiver(BotanicSourcelinkTile tile, float efficiency){
+    public CustomManaReceiver(BotanicSourcelinkTile tile, double efficiency){
         this.tile = tile;
         this.efficiency = efficiency;
-        neededValue = Math.round(BotaniaRegistry.manaPerSource * (1/efficiency));
+        neededValue = (int)Math.round(BotaniaRegistry.getManaPerSource() * (1/efficiency));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CustomManaReceiver implements ManaReceiver {
 
     @Override
     public int getCurrentMana() {
-        return tile.getSource()*BotaniaRegistry.manaPerSource;
+        return tile.getSource()*BotaniaRegistry.getManaPerSource();
     }
 
     @Override

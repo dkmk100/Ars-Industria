@@ -3,8 +3,10 @@
   "package": "com.dkmk100.ars_industria.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "ars_industria.refmap.json",
+  "plugin": "com.dkmk100.ars_industria.IndustriaMixinPlugin",
   "mixins": [
-    "GWRBulletEntityMixin"
+    "GWRBulletEntityMixin",
+    "SpellDiscountFixMixin"
   ],
   "client": [
 

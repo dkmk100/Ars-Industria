@@ -4,7 +4,10 @@ import blusunrize.immersiveengineering.api.tool.BulletHandler;
 import blusunrize.immersiveengineering.common.entities.RevolvershotEntity;
 import com.dkmk100.ars_industria.ArsIndustria;
 import com.dkmk100.ars_industria.StatsModifier;
+import com.dkmk100.ars_industria.items.IESpellBulletItem;
 import com.hollingsworth.arsnouveau.api.spell.*;
+import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.LivingCaster;
+import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.PlayerCaster;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -39,9 +42,17 @@ public class IESpellBullet implements BulletHandler.IBullet {
         if(!world.isClientSide && shooter instanceof Player) {
             Player player = (Player) shooter;
             ItemStack stack = ((RevolvershotEntity) projectile).bulletPotion;
+
             ISpellCaster caster = new SpellCaster(stack);
-            SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter);
+            SpellContext context = new SpellContext(world, caster.getSpell(), (LivingEntity) shooter, PlayerCaster.from((LivingEntity) shooter), stack);
             SpellResolver resolver = new SpellResolver(context);
+            if(stack.getItem() instanceof IESpellBulletItem bulletItem){
+                StatsModifier mod = bulletItem.getTempModifier();
+                mod.ModifySpell(resolver.spell);
+            }
+            else{
+                ArsIndustria.LOGGER.warn("ie spell bullet not instance of...");
+            }
             StatsModifier.CastWithoutLimitErrors(resolver,rtr);
         }
     }

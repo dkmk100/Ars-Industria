@@ -42,7 +42,7 @@ minecraft {
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
 
-    mappings channel: 'parchment', version: '2022.03.13-1.18.2'
+    mappings channel: 'parchment', version: '2022.08.10-1.19.2'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -163,15 +163,14 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${mc_version}-${curio_version}")
 
 
-    runtimeOnly fg.deobf("curse.maven:ars-omega-597007:4623885")  // Ars Omega
+    //runtimeOnly fg.deobf("curse.maven:ars-omega-597007:4623885")  // Ars Omega
     compileOnly fg.deobf("curse.maven:ars-omega-597007:4623885")
 
-    runtimeOnly fg.deobf("curse.maven:immersive-engineering-231951:4535935")  // Immersive Engineering
+    //runtimeOnly fg.deobf("curse.maven:immersive-engineering-231951:4535935")  // Immersive Engineering
     compileOnly fg.deobf("curse.maven:immersive-engineering-231951:4535935")
 
 
-
-    runtimeOnly fg.deobf('vazkii.botania:Botania:1.19.2-440-FORGE')
+    //runtimeOnly fg.deobf('vazkii.botania:Botania:1.19.2-440-FORGE')
     compileOnly fg.deobf('vazkii.botania:Botania:1.19.2-440-FORGE')
 
     runtimeOnly fg.deobf("maven.modrinth:guns-without-roses:${gwr_file}") //guns without roses

@@ -94,17 +94,17 @@ public class GWREnchantersGun extends GunItem implements ICasterTool, ISpellModi
 
     @Override
     public void sendInvalidMessage(Player player) {
-        PortUtil.sendMessageNoSpam(player, Component.m_237115_("ars_nouveau.sword.invalid"));
+        PortUtil.sendMessageNoSpam(player, Component.translatable("ars_nouveau.sword.invalid"));
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if(creativeOnly){
-            tooltip.add(Component.m_237113_("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.literal("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
         }
         if(repairMaterial!=null && repairMaterial.get() != null && repairMaterial.get().getItems().length > 0){
-            tooltip.add(Component.m_237113_("Repair with " + repairMaterial.get().getItems()[0].getDisplayName().getString()));
+            tooltip.add(Component.literal("Repair with " + repairMaterial.get().getItems()[0].getDisplayName().getString()));
         }
         getInformation(stack, worldIn, tooltip, flagIn);
 

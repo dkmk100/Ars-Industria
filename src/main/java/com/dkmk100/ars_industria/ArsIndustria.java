@@ -1,11 +1,14 @@
 package com.dkmk100.ars_industria;
 
 import com.dkmk100.ars_industria.registry.*;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,7 +24,11 @@ public class ArsIndustria
 
     public static final Logger LOGGER = LogManager.getLogger();
 
+    ForgeConfigSpec spec = null;
+
     public ArsIndustria() {
+        ForgeConfigSpec.Builder configBuilder = new ForgeConfigSpec.Builder();
+
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
         ModRegistry.registerRegistries(modbus);
         if(CompatHandler.IELoaded()){
@@ -34,7 +41,14 @@ public class ArsIndustria
         }
         if(CompatHandler.BotaniaLoaded()){
             BotaniaRegistry.RegisterItems();
+            BotaniaRegistry.buildConfig(configBuilder);
         }
+
+        spec = configBuilder.build();
+
+        ModConfig config = new ModConfig(ModConfig.Type.SERVER, spec, ModLoadingContext.get().getActiveContainer());
+        ModLoadingContext.get().getActiveContainer().addConfig(config);
+
         modbus.addListener(this::setup);
         modbus.addListener(this::doClientStuff);
         MinecraftForge.EVENT_BUS.register(this);

@@ -6,7 +6,6 @@ import com.hollingsworth.arsnouveau.common.block.tile.SourcelinkTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -40,7 +39,7 @@ public class BotanicSourcelinkTile extends SourcelinkTile implements ICapability
     }
 
     private LazyOptional<ManaReceiver> makeReceiver(){
-        return LazyOptional.of(() -> new CustomManaReceiver(this,BotaniaRegistry.efficiency));
+        return LazyOptional.of(() -> new CustomManaReceiver(this,BotaniaRegistry.getEfficiency()));
     }
 
     @Override

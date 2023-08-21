@@ -2,6 +2,7 @@ package com.dkmk100.ars_industria.items;
 
 import blusunrize.immersiveengineering.api.tool.BulletHandler;
 import blusunrize.immersiveengineering.common.items.BulletItem;
+import com.dkmk100.ars_industria.StatsModifier;
 import com.dkmk100.ars_industria.bullets.IESpellBullet;
 import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.spell.AbstractCastMethod;
@@ -25,21 +26,31 @@ import java.util.List;
 
 public class IESpellBulletItem extends BulletItem implements ICasterTool {
 
+    StatsModifier statsModifier;
 
     public IESpellBulletItem(){
         this(new IESpellBullet());
     }
     public IESpellBulletItem(BulletHandler.IBullet type) {
         super(type);
+        statsModifier = new StatsModifier();
+    }
+    public IESpellBulletItem(BulletHandler.IBullet type, StatsModifier modifier) {
+        super(type);
+        statsModifier = new StatsModifier(modifier);//copy just in case
     }
     @Override
     public boolean isScribedSpellValid(ISpellCaster caster, Player player, InteractionHand hand, ItemStack stack, Spell spell) {
         return spell.recipe.stream().noneMatch(s -> s instanceof AbstractCastMethod);
     }
 
+    public StatsModifier getTempModifier(){
+        return new StatsModifier(statsModifier);//just use copy constructor
+    }
+
     @Override
     public void sendInvalidMessage(Player player) {
-        PortUtil.sendMessageNoSpam(player, Component.m_237115_("ars_nouveau.sword.invalid"));
+        PortUtil.sendMessageNoSpam(player, Component.translatable("ars_nouveau.sword.invalid"));
     }
 
     @Override
@@ -47,7 +58,6 @@ public class IESpellBulletItem extends BulletItem implements ICasterTool {
         ArrayList<AbstractSpellPart> recipe = new ArrayList<>();
         recipe.add(MethodTouch.INSTANCE);
         recipe.addAll(spell.recipe);
-        recipe.add(AugmentAmplify.INSTANCE);
         spell.recipe = recipe;
         return ICasterTool.super.setSpell(caster, player, hand, stack, spell);
     }

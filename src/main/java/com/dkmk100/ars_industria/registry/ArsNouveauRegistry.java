@@ -1,4 +1,4 @@
-package com.dkmk100.ars_industria;
+package com.dkmk100.ars_industria.registry;
 
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;

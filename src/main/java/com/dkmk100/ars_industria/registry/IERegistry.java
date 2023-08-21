@@ -3,9 +3,11 @@ package com.dkmk100.ars_industria.registry;
 import blusunrize.immersiveengineering.api.tool.BulletHandler;
 import com.dkmk100.ars_industria.ArsIndustria;
 import com.dkmk100.ars_industria.ScribeBulletRecipe;
+import com.dkmk100.ars_industria.StatsModifier;
 import com.dkmk100.ars_industria.bullets.IESpellBullet;
 import com.dkmk100.ars_industria.items.IESpellBulletItem;
 import com.dkmk100.arsomega.util.ForgeEventBusSubscriber;
+import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -29,7 +31,7 @@ public class IERegistry {
     public static RegistryObject<Item> SPELL_BULLET = null;
     private static final BulletHandler.IBullet SpellBullet = new IESpellBullet();
     public static void RegisterItems(){
-        SPELL_BULLET = ModRegistry.ITEMS.register("spell_bullet", () -> new IESpellBulletItem(SpellBullet));
+        SPELL_BULLET = ModRegistry.ITEMS.register("spell_bullet", () -> new IESpellBulletItem(SpellBullet, new StatsModifier().withAugment(AugmentAmplify.INSTANCE,1,true)));
     }
 
     public static void RegisterBullets(){

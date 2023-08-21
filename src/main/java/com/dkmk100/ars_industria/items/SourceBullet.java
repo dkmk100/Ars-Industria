@@ -88,7 +88,7 @@ public class SourceBullet extends BulletItem {
     @Override
     public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         if(creativeItem){
-            tooltip.add(Component.m_237113_("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.literal("Creative mode only item").withStyle(ChatFormatting.DARK_PURPLE));
         }
         super.appendHoverText(stack,worldIn,tooltip,flagIn);
 

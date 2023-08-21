@@ -1,15 +1,13 @@
 package com.dkmk100.ars_industria;
 
+import com.dkmk100.ars_industria.registry.CompatHandler;
 import com.dkmk100.arsomega.glyphs.IIgnoreBuffs;
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentDampen;
-import com.hollingsworth.arsnouveau.common.spell.method.MethodTouch;
 import com.hollingsworth.arsnouveau.common.util.PortUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.HitResult;
@@ -21,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class StatsModifier{
+public class StatsModifier {
     List<AugmentModification> endModifications = new ArrayList<>();
     List<InnerAugmentModification> innerModifications = new ArrayList<>();
     float costMultiplier = 1f;
@@ -137,34 +135,34 @@ public class StatsModifier{
     public void addTooltip(List<Component> tooltip){
         for(AugmentModification augment : endModifications){
             if(augment.affectCost) {
-                tooltip.add(Component.m_237113_("Adds " + augment.count + " " + augment.augment.getLocaleName() + " to the end of the spell on cast, increasing cost accordingly"));
+                tooltip.add(Component.literal("Adds " + augment.count + " " + augment.augment.getLocaleName() + " to the end of the spell on cast, increasing cost accordingly"));
             }
             else{
-                tooltip.add(Component.m_237113_("Adds " + augment.count + " free " + augment.augment.getLocaleName() + " to the end of the spell on cast"));
+                tooltip.add(Component.literal("Adds " + augment.count + " free " + augment.augment.getLocaleName() + " to the end of the spell on cast"));
             }
         }
         for(InnerAugmentModification augment : innerModifications){
             if(augment.affectCost) {
-                tooltip.add(Component.m_237113_("Adds " + augment.countEach + " " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast, increasing cost accordingly"));
+                tooltip.add(Component.literal("Adds " + augment.countEach + " " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast, increasing cost accordingly"));
             }
             else{
-                tooltip.add(Component.m_237113_("Adds " + augment.countEach + " free " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast"));
+                tooltip.add(Component.literal("Adds " + augment.countEach + " free " + augment.augment.getLocaleName() + " to up to " + augment.totalEffects + " compatible effects on cast"));
             }
         }
 
         float discount = Math.round((1f - costMultiplier)*1000)/10f;
 
         if(discount>0) {
-            tooltip.add(Component.m_237113_("Spell discount: " + discount + "%").withStyle(ChatFormatting.DARK_GREEN));
+            tooltip.add(Component.literal("Spell discount: " + discount + "%").withStyle(ChatFormatting.DARK_GREEN));
         }
         else if(discount!=0){
-            tooltip.add(Component.m_237113_("Spell cost increase: " + (-1 * discount) + "%").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.literal("Spell cost increase: " + (-1 * discount) + "%").withStyle(ChatFormatting.DARK_RED));
         }
         if(costIncrease > 0){
-            tooltip.add(Component.m_237113_("Spell flat cost increase: " + costIncrease + " mana").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.literal("Spell flat cost increase: " + costIncrease + " mana").withStyle(ChatFormatting.DARK_RED));
         }
         else if(costIncrease < 0){
-            tooltip.add(Component.m_237113_("Spell flat discount: " + (-1 * costIncrease) + " mana").withStyle(ChatFormatting.DARK_GREEN));
+            tooltip.add(Component.literal("Spell flat discount: " + (-1 * costIncrease) + " mana").withStyle(ChatFormatting.DARK_GREEN));
         }
 
     }
@@ -197,7 +195,7 @@ public class StatsModifier{
         for(AugmentModification mod : endModifications){
             //adding in this way does not augment cost
             spell.add(mod.augment, mod.count);
-            if(mod.affectCost){
+            if(!mod.affectCost){
                 spell.addDiscount(mod.augment.getCastingCost());
             }
         }
@@ -220,7 +218,7 @@ public class StatsModifier{
                 InnerAugmentModification augment = innerModifications.get(i4);
                 if (part instanceof AbstractEffect && part.compatibleAugments.contains(augment.augment)) {
                     boolean valid = true;
-                    if (part instanceof IIgnoreBuffs) {
+                    if (CompatHandler.shouldIgnoreBuffs(part)) {
                         valid = false;
                     } else if (i + 1 < spell.recipe.size()) {
                         AbstractSpellPart part2 = (AbstractSpellPart) spell.recipe.get(i + 1);
@@ -238,7 +236,7 @@ public class StatsModifier{
 
                         for (int i3 = 0; i3 < augment.countEach; ++i3) {
                             recipe.add(augment.augment);
-                            if(augment.affectCost){
+                            if(!augment.affectCost){
                                 spell.addDiscount(augment.augment.getCastingCost());
                             }
                         }
@@ -248,14 +246,14 @@ public class StatsModifier{
         }
 
         spell.recipe = recipe;
-
         spell.addDiscount(Math.round(spell.getDiscountedCost() * (1f - costMultiplier)));
         return spell;
     }
-
+    /*
     public SpellStats ModifyStats(SpellStats stats){
         return stats;
     }
+     */
 
     //both of these need both normal and copy constructors
     static class AugmentModification{

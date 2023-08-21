@@ -83,13 +83,13 @@ public class ManaRelay extends ModdedTile implements ITickable, WandBindable {
                     return;
                 }
 
-                float rawManaAvailable = tile.getSource() * BotaniaRegistry.manaPerSource;
+                float rawManaAvailable = tile.getSource() * BotaniaRegistry.getManaPerSource();
 
                 float rawMana = Math.min(rawManaAvailable, collector.getMaxMana() - collector.getCurrentMana());
 
-                int sourceTaken = Math.round(rawMana / BotaniaRegistry.manaPerSource);
+                int sourceTaken = Math.round(rawMana / BotaniaRegistry.getManaPerSource());
 
-                int manaTransfered = Math.round(rawMana * BotaniaRegistry.efficiency);
+                int manaTransfered = (int)Math.round(rawMana * BotaniaRegistry.getEfficiency());
 
                 tile.addSource(-1 * sourceTaken);
 
